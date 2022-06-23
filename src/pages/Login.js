@@ -57,9 +57,10 @@ class Login extends React.Component {
             <img
               src="logo512.png"
               alt="react-wallet"
-              className="w-1/3 animate-pulse brightness-70"
+              className="w-1/3 animate-pulse animate-[spin_4s_ease-in-out_infinite]
+              brightness-75"
             />
-            <span className="text-3xl z-10 drop-shadow-lg text-gray-700">
+            <span className="text-3xl z-10 drop-shadow-lg text-gray-700 font-light">
               React Wallet
             </span>
           </div>
