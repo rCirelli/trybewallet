@@ -1,4 +1,3 @@
-// import { TextField } from '@material-ui/core';
 // import { validate } from 'react-email-validator'; // https://www.npmjs.com/package/react-email-validator
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -18,6 +17,14 @@ class Login extends React.Component {
     this.setState({ [target.id]: target.value }, this.validateForm);
   };
 
+  handleSubmit = () => {
+    const { dispatch, history } = this.props;
+    const { email } = this.state;
+
+    dispatch(setUserEmail(email));
+    history.push('/carteira');
+  };
+
   validateForm = () => {
     const MIN_PASS_LENGTH = 6;
     const { email, password, isEmailValid, isPassValid } = this.state;
@@ -33,14 +40,6 @@ class Login extends React.Component {
     this.setState({ isEmailValid: validEmail, isPassValid: validPassword, isFormValid });
   };
 
-  handleSubmit = () => {
-    const { dispatch, history } = this.props;
-    const { email } = this.state;
-
-    dispatch(setUserEmail(email));
-    history.push('/carteira');
-  };
-
   validateEmail(email) {
     const emailRegex = /\S+@\S+\.\S+/;
     return emailRegex.test(email);
@@ -49,9 +48,9 @@ class Login extends React.Component {
   render() {
     const { email, password, isFormValid, isEmailValid, isPassValid } = this.state;
     return (
-      <div className="flex justify-center items-center h-screen">
+      <main className="flex justify-center items-center h-screen">
         <div
-          className="bg-slate-300 w-[300px] rounded-lg pt-6 pb-10
+          className="bg-slate-300 w-[300px] rounded-lg py-6
           flex flex-col justify-center items-center gap-6"
         >
           <div className="flex flex-col justify-center items-center">
@@ -65,68 +64,46 @@ class Login extends React.Component {
             </span>
           </div>
           <div className="flex flex-col gap-4">
-            {/* <TextField
-              key="email-input"
-              type="email"
-              label="Email"
-              variant="filled"
-              id="email"
-              data-testid="email-input"
-              value={ email }
-              onChange={ this.handleChange }
-              helperText={
-                email.length > 0 && !isEmailValid ? 'Email inválido' : null
-              }
-              color={
-                email.length > 0 && !isEmailValid ? 'secondary' : 'primary'
-              }
-            />
-            <TextField
-              key="password-input"
-              type="password"
-              label="Senha"
-              variant="filled"
-              id="password"
-              data-testid="password-input"
-              value={ password }
-              onChange={ this.handleChange }
-              helperText={
-                password.length > 0 && !isPassValid
-                  ? 'Mínimo de 6 caracteres'
-                  : null
-              }
-              color={
-                password.length > 0 && !isPassValid ? 'secondary' : 'primary'
-              }
-            /> */}
-            <input
-              type="email"
-              placeholder="Email"
-              className={ `rounded-md bg-gray-900 border-none
-              text-gray-400 placeholder:text-gray-700
-              ${isEmailValid === false && 'outline outline-red-600 text-red-600'} ` }
-              id="email"
-              data-testid="email-input"
-              value={ email }
-              onChange={ this.handleChange }
-            />
-            {isEmailValid === false && (
-              <span className="text-red-600">Email inválido</span>
-            )}
-            <input
-              type="password"
-              placeholder="Senha"
-              className={ `rounded-md bg-gray-900 border-none
-              text-gray-400 placeholder:text-gray-700
-              ${isPassValid === false && 'outline outline-red-600 text-red-600'} ` }
-              id="password"
-              data-testid="password-input"
-              value={ password }
-              onChange={ this.handleChange }
-            />
-            {isPassValid === false && (
-              <span className="text-red-600">Mínimo de 6 caracteres</span>
-            )}
+            <div>
+              <input
+                type="email"
+                placeholder="Email"
+                className={ `rounded-md bg-gray-900 border-none
+                text-gray-400 placeholder:text-gray-700
+                ${isEmailValid === false && 'border-2 border-red-600 text-red-600'} ` }
+                id="email"
+                data-testid="email-input"
+                value={ email }
+                onChange={ this.handleChange }
+              />
+              {isEmailValid === false && (
+                <span
+                  className="text-red-600 text-xs block mt-0.5"
+                >
+                  Email inválido
+                </span>
+              )}
+            </div>
+            <div>
+              <input
+                type="password"
+                placeholder="Senha"
+                className={ `rounded-md bg-gray-900 border-none
+                text-gray-400 placeholder:text-gray-700
+                ${isPassValid === false && 'outline outline-red-600 text-red-600'} ` }
+                id="password"
+                data-testid="password-input"
+                value={ password }
+                onChange={ this.handleChange }
+              />
+              {isPassValid === false && (
+                <span
+                  className="text-red-600 text-xs block mt-0.5"
+                >
+                  Mínimo de 6 caracteres
+                </span>
+              )}
+            </div>
             <button
               type="button"
               className="inline-block px-6 py-3 bg-blue-600 text-white mb-3
@@ -142,7 +119,7 @@ class Login extends React.Component {
             </button>
           </div>
         </div>
-      </div>
+      </main>
     );
   }
 }
