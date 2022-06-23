@@ -2,11 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
+import { fetchCurrencies } from '../actions';
 
 class Wallet extends React.Component {
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchCurrencies());
+  }
+
   render() {
-    const { user, wallet } = this.props;
-    console.log(user, wallet);
+    // const { user, wallet } = this.props;
+    // console.log(user, wallet);
 
     return (
       <>
@@ -40,6 +46,7 @@ Wallet.propTypes = {
     editor: PropTypes.bool.isRequired,
     idToEdit: PropTypes.number.isRequired,
   }).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
