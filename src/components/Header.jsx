@@ -14,9 +14,14 @@ class Header extends Component {
 
     return (
       <header
-        className="flex justify-between items-center p-5"
+        className="flex justify-between items-center p-5 border-b border-emerald-900
+        bg-gradient-to-b from-slate-900 fixed w-full z-50 top-0 backdrop-blur-sm"
       >
-        <span>Header</span>
+        <img
+          src="logo512.png"
+          alt="react-wallet"
+          className="w-1/3 brightness-75 hue-rotate-15 w-[30px]"
+        />
         <div className="flex gap-10">
           <div
             data-testid="email-field"

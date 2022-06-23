@@ -13,8 +13,7 @@ class Wallet extends React.Component {
         <Header />
         <div
           className="flex justify-center items-center h-full w-full
-            bg-gradient-to-t from-emerald-900 to-slate-900
-            brightness-[0.3]"
+            bg-gradient-to-t from-emerald-900 to-slate-900 brightness-[0.3]"
         >
           <span>Wallet</span>
         </div>
