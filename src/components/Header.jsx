@@ -1,29 +1,45 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Header from '../components/Header';
 
-class Wallet extends React.Component {
+class Header extends Component {
+  state = {
+    expensesTotal: 0,
+    currentCurrency: 'BRL',
+  }
+
   render() {
-    const { user, wallet } = this.props;
-    console.log(user, wallet);
+    const { user } = this.props;
+    const { expensesTotal, currentCurrency } = this.state;
 
     return (
-      <>
-        <Header />
-        <div
-          className="flex justify-center items-center h-full w-full
-            bg-gradient-to-t from-emerald-900 to-slate-900
-            brightness-[0.3]"
-        >
-          <span>Wallet</span>
+      <header
+        className="flex justify-between items-center p-5"
+      >
+        <span>Header</span>
+        <div className="flex gap-10">
+          <div
+            data-testid="email-field"
+          >
+            {`Email: ${user.email}`}
+          </div>
+          <div
+            data-testid="total-field"
+          >
+            {`Despesa Total: R$ ${expensesTotal}`}
+          </div>
+          <div
+            data-testid="header-currency-field"
+          >
+            {`🪙 ${currentCurrency}`}
+          </div>
         </div>
-      </>
+      </header>
     );
   }
 }
 
-Wallet.propTypes = {
+Header.propTypes = {
   user: PropTypes.shape({
     email: PropTypes.string.isRequired,
   }).isRequired,
@@ -48,4 +64,4 @@ const mapStateToProps = (state) => ({
   wallet: state.wallet,
 });
 
-export default connect(mapStateToProps)(Wallet);
+export default connect(mapStateToProps)(Header);

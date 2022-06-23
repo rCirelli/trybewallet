@@ -48,7 +48,10 @@ class Login extends React.Component {
   render() {
     const { email, password, isFormValid, isEmailValid, isPassValid } = this.state;
     return (
-      <main className="flex justify-center items-center h-screen">
+      <main
+        className="flex justify-center items-center h-screen w-screen
+        bg-gradient-to-t from-emerald-900 to-slate-900"
+      >
         <div
           className="bg-slate-300 w-[300px] rounded-lg py-6
           flex flex-col justify-center items-center gap-6"
@@ -58,7 +61,7 @@ class Login extends React.Component {
               src="logo512.png"
               alt="react-wallet"
               className="w-1/3 animate-pulse animate-[spin_4s_ease-in-out_infinite]
-              brightness-75"
+              brightness-75 hue-rotate-15"
             />
             <span className="text-3xl z-10 drop-shadow-lg text-gray-700 font-light">
               React Wallet
@@ -69,9 +72,11 @@ class Login extends React.Component {
               <input
                 type="email"
                 placeholder="Email"
-                className={ `rounded-md bg-gray-900 border-none
-                text-gray-400 placeholder:text-gray-700
-                ${isEmailValid === false && 'border-2 border-red-600 text-red-600'} ` }
+                className={ `rounded-md bg-slate-200 border-none
+                outline outline-1 outline-emerald-900 outline-offset-1
+                text-gray-600 placeholder:text-gray-400
+                ${isEmailValid === false && `
+                focus:ring focus:ring-1 focus:ring-red-600 text-red-600`} ` }
                 id="email"
                 data-testid="email-input"
                 value={ email }
@@ -89,9 +94,11 @@ class Login extends React.Component {
               <input
                 type="password"
                 placeholder="Senha"
-                className={ `rounded-md bg-gray-900 border-none
-                text-gray-400 placeholder:text-gray-700
-                ${isPassValid === false && 'outline outline-red-600 text-red-600'} ` }
+                className={ `rounded-md bg-slate-200 border-none
+                outline outline-1 outline-emerald-900 outline-offset-1
+                text-gray-600 placeholder:text-gray-400
+                ${isPassValid === false && `
+                focus:ring focus:ring-1 focus:ring-red-600 text-red-600`} ` }
                 id="password"
                 data-testid="password-input"
                 value={ password }
@@ -107,12 +114,13 @@ class Login extends React.Component {
             </div>
             <button
               type="button"
-              className="inline-block px-6 py-3 bg-blue-600 text-white mb-3
+              className="inline-block px-6 py-3 bg-emerald-600 text-white mb-3
               font-medium text-base leading-tight uppercase rounded-md shadow-md
-              hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
-              focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg
+              hover:bg-emerald-700 hover:shadow-lg focus:bg-emerald-700 focus:shadow-lg
+              focus:outline-none focus:ring-0 active:bg-emerald-800 active:shadow-lg
               transition duration-150 ease-in-out
-              disabled:saturate-0 disabled:brightness-50"
+              disabled:saturate-0 disabled:brightness-50 disabled:bg-emerald-900
+              disabled:text-emerald-500"
               onClick={ this.handleSubmit }
               disabled={ !isFormValid }
             >
