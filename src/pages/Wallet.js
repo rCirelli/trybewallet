@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import { fetchCurrencies } from '../actions';
+import ExpenseForm from '../components/ExpenseForm';
 
 class Wallet extends React.Component {
   componentDidMount() {
@@ -18,10 +19,14 @@ class Wallet extends React.Component {
       <>
         <Header />
         <div
-          className="flex justify-center items-center h-full w-full
-            bg-gradient-to-t from-emerald-900 to-slate-900 brightness-[0.3]"
+          className="h-full w-full bg-gradient-to-t from-emerald-900 to-slate-900"
         >
-          <span>Wallet</span>
+          <div
+            className="flex justify-center items-center h-full w-full
+            backdrop-brightness-[0.3]"
+          >
+            <ExpenseForm />
+          </div>
         </div>
       </>
     );
