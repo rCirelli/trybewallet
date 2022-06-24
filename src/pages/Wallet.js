@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import { fetchCurrencies } from '../actions/currencies';
 import ExpenseForm from '../components/ExpenseForm';
+import ExpenseTable from '../components/ExpenseTable';
 
 class Wallet extends React.Component {
   componentDidMount() {
@@ -16,19 +17,18 @@ class Wallet extends React.Component {
     // console.log(user, wallet);
 
     return (
-      <>
-        <Header />
+      <div
+        className="h-full w-full bg-gradient-to-t from-emerald-900 to-slate-900"
+      >
         <div
-          className="h-full w-full bg-gradient-to-t from-emerald-900 to-slate-900"
-        >
-          <div
-            className="flex justify-center items-center h-full w-full
+          className="flex flex-col justify-start items-center h-full w-full gap-5
             backdrop-brightness-[0.3]"
-          >
-            <ExpenseForm />
-          </div>
+        >
+          <Header />
+          <ExpenseForm />
+          <ExpenseTable />
         </div>
-      </>
+      </div>
     );
   }
 }

@@ -38,7 +38,7 @@ class Header extends Component {
     return (
       <header
         className="flex justify-between items-center p-5 border-b border-emerald-900
-        bg-gradient-to-b from-slate-900 fixed w-full z-50 top-0 backdrop-blur-sm"
+        bg-gradient-to-b from-slate-900 fixed w-full z-50 top-0 backdrop-blur-sm h-18"
       >
         <img
           src="logo512.png"

@@ -39,7 +39,7 @@ class ExpenseForm extends Component {
     return (
       <div
         className="max-w-6xl w-11/12 border border-emerald-900 rounded-lg px-3 py-3 pb-5
-        bg-gradient-to-b from-slate-900 fixed w-full z-50 top-20 backdrop-blur-sm
+        bg-gradient-to-b from-slate-900 w-full backdrop-blur-sm mt-[5.5rem]
         flex flex-wrap justify-center align-center gap-5"
       >
         <div className="w-full flex flex-wrap justify-evenly align-center">
