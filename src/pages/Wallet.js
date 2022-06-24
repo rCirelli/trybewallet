@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
-import { fetchCurrencies } from '../actions';
+import { fetchCurrencies } from '../actions/currencies';
 import ExpenseForm from '../components/ExpenseForm';
 
 class Wallet extends React.Component {
@@ -40,13 +40,13 @@ Wallet.propTypes = {
   wallet: PropTypes.shape({
     currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
     expenses: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
-      currency: PropTypes.string.isRequired,
-      method: PropTypes.string.isRequired,
-      tag: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      exchangeRates: PropTypes.string.isRequired,
+      // id: PropTypes.number.isRequired,
+      // value: PropTypes.string.isRequired,
+      // currency: PropTypes.string.isRequired,
+      // method: PropTypes.string.isRequired,
+      // tag: PropTypes.string.isRequired,
+      // description: PropTypes.string.isRequired,
+      // exchangeRates: PropTypes.string.isRequired,
     })).isRequired,
     editor: PropTypes.bool.isRequired,
     idToEdit: PropTypes.number.isRequired,

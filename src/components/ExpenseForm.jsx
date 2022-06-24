@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 import Dropdown from './Dropdown';
 import TextInput from './TextInput';
 import Button from './Button';
-import { saveExpense } from '../actions';
+import saveExpense from '../actions/expenses';
+import { fetchRates } from '../actions/rates';
 
 class ExpenseForm extends Component {
   INITIAL_STATE = {
-    id: '000',
-    value: '0',
+    value: '',
     currency: 'USD',
-    paymentMethod: 'Dinheiro',
+    method: 'Dinheiro',
     tag: 'Alimentação',
     description: '',
   }
@@ -22,21 +22,19 @@ class ExpenseForm extends Component {
     this.setState({ [target.id]: String(target.value) });
   }
 
-  handleSubmit = () => {
-    const { dispatch } = this.props;
-    const { id } = this.state;
-    const newId = Number(id) + 1;
-    const expense = { ...this.state, id: String(newId) };
+  handleSubmit = async () => {
+    const { dispatch, wallet } = this.props;
+    const id = wallet.expenses.length;
+    const exchangeRates = await fetchRates()();
+    const expense = { ...this.state, id, exchangeRates };
 
     dispatch(saveExpense(expense));
-    this.setState(this.INITIAL_STATE, () => {
-      this.setState
-    });
+    this.setState(this.INITIAL_STATE);
   }
 
   render() {
     const { wallet } = this.props;
-    const { value, description, currency, paymentMethod, tag } = this.state;
+    const { value, description, currency, method, tag } = this.state;
 
     return (
       <div
@@ -62,9 +60,9 @@ class ExpenseForm extends Component {
             options={ wallet.currencies }
           />
           <Dropdown
-            defaultValue={ paymentMethod }
-            id="paymentMethod"
-            name="paymentMethod"
+            defaultValue={ method }
+            id="method"
+            name="method-input"
             placeholder="Meio de pagamento"
             onChange={ this.onChangeHandler }
             label="Meio de Pagamento"
@@ -105,13 +103,13 @@ ExpenseForm.propTypes = {
   wallet: PropTypes.shape({
     currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
     expenses: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
-      currency: PropTypes.string.isRequired,
-      method: PropTypes.string.isRequired,
-      tag: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      exchangeRates: PropTypes.string.isRequired,
+      // id: PropTypes.number.isRequired,
+      // value: PropTypes.string.isRequired,
+      // currency: PropTypes.string.isRequired,
+      // method: PropTypes.string.isRequired,
+      // tag: PropTypes.string.isRequired,
+      // description: PropTypes.string.isRequired,
+      // exchangeRates: PropTypes.string.isRequired,
     })).isRequired,
     editor: PropTypes.bool.isRequired,
     idToEdit: PropTypes.number.isRequired,

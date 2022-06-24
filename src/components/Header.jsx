@@ -8,6 +8,29 @@ class Header extends Component {
     currentCurrency: 'BRL',
   }
 
+  componentDidUpdate() {
+    this.sumExpenses();
+  }
+
+  sumExpenses = () => {
+    const { expensesTotal } = this.state;
+    const { wallet: { expenses } } = this.props;
+
+    const totalExpense = expenses.reduce((acc, expense) => {
+      const expenseCurrency = expense.currency;
+      const expenseValue = Number(expense.value);
+      const exchangeRate = Number(expense.exchangeRates[expenseCurrency].ask);
+
+      const newValue = expenseValue * exchangeRate;
+
+      return (newValue + acc);
+    }, 0).toFixed(2);
+
+    if (expensesTotal !== totalExpense) {
+      this.setState({ expensesTotal: totalExpense });
+    }
+  }
+
   render() {
     const { user } = this.props;
     const { expensesTotal, currentCurrency } = this.state;
@@ -28,10 +51,13 @@ class Header extends Component {
           >
             {`Email: ${user.email}`}
           </div>
-          <div
-            data-testid="total-field"
-          >
-            {`Despesa Total: R$ ${expensesTotal}`}
+          <div className="flex justify-center align-center gap-1">
+            Despesa Total: R$
+            <div
+              data-testid="total-field"
+            >
+              {expensesTotal}
+            </div>
           </div>
           <div
             data-testid="header-currency-field"
@@ -51,13 +77,16 @@ Header.propTypes = {
   wallet: PropTypes.shape({
     currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
     expenses: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
-      currency: PropTypes.string.isRequired,
-      method: PropTypes.string.isRequired,
-      tag: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      exchangeRates: PropTypes.string.isRequired,
+      // id: PropTypes.string.isRequired,
+      // value: PropTypes.string.isRequired,
+      // currency: PropTypes.string.isRequired,
+      // method: PropTypes.string.isRequired,
+      // tag: PropTypes.string.isRequired,
+      // description: PropTypes.string.isRequired,
+      exchangeRates: PropTypes.shape({
+        code: PropTypes.string,
+        ask: PropTypes.string,
+      }).isRequired,
     })).isRequired,
     editor: PropTypes.bool.isRequired,
     idToEdit: PropTypes.number.isRequired,

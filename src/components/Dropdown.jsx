@@ -18,7 +18,7 @@ class Dropdown extends Component {
 
     return (
       <div>
-        <label htmlFor={ name } className="text-sm flex flex-col my-2">
+        <label htmlFor={ id } className="text-sm flex flex-col my-2">
           {label}
           <select
             defaultValue={ defaultValue }
