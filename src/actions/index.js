@@ -2,6 +2,7 @@ export const SET_USER_EMAIL = 'SET_USER_EMAIL';
 export const REQUEST_CURRENCIES = 'GET_CURRENCIES';
 export const REQUEST_CURRENCIES_ERROR = 'GET_CURRENCIES_ERROR';
 export const SET_CURRENCIES = 'SET_CURRENCIES';
+export const SAVE_EXPENSE = 'SAVE_EXPENSE';
 // const axios = require('axios').default;
 
 export default function setUserEmail(email) {
@@ -46,3 +47,8 @@ export const fetchCurrencies = () => (dispatch) => {
     })
     .catch((error) => dispatch(requestCurrenciesError(error)));
 };
+
+export const saveExpense = (expense) => ({
+  type: SAVE_EXPENSE,
+  payload: expense,
+});

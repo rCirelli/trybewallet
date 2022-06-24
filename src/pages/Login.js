@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import setUserEmail from '../actions';
+import Button from '../components/Button';
 
 class Login extends React.Component {
   state = {
@@ -112,20 +113,12 @@ class Login extends React.Component {
                 </span>
               )}
             </div>
-            <button
-              type="button"
-              className="inline-block px-6 py-3 bg-emerald-600 text-white mb-3
-              font-medium text-base leading-tight uppercase rounded-md shadow-md
-              hover:bg-emerald-700 hover:shadow-lg focus:bg-emerald-700 focus:shadow-lg
-              focus:outline-none focus:ring-0 active:bg-emerald-800 active:shadow-lg
-              transition duration-150 ease-in-out
-              disabled:saturate-0 disabled:brightness-50 disabled:bg-emerald-900
-              disabled:text-emerald-500"
+            <Button
+              name="btn-login"
+              label="Entrar"
               onClick={ this.handleSubmit }
               disabled={ !isFormValid }
-            >
-              Entrar
-            </button>
+            />
           </div>
         </div>
       </main>

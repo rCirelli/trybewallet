@@ -5,20 +5,21 @@ class TextInput extends Component {
   state = { }
 
   render() {
-    const { name, placeholder, onChange, label } = this.props;
+    const { name, placeholder, onChange, label, css, id, value } = this.props;
     return (
       <div>
-        <label htmlFor={ name }>
+        <label htmlFor={ name } className="text-sm flex flex-col my-2">
           { label }
           <input
-            className={ `ml-3 rounded-md bg-slate-200 border-none text-slate-400
+            className={ `-ml-2 rounded-md bg-slate-200 border-none text-slate-400
             outline outline-1 outline-emerald-900 outline-offset-1 bg-slate-900
-            border-none placeholder:text-gray-400 py-2 pl-4 pr-2 w-36` }
+            border-none placeholder:text-gray-400 py-2 pl-4 pr-2 w-36 ${css}` }
             type="text"
             placeholder={ placeholder }
             data-testid={ name }
-            id={ name }
+            id={ id }
             onChange={ onChange }
+            value={ value }
           />
         </label>
       </div>
@@ -28,9 +29,13 @@ class TextInput extends Component {
 
 TextInput.defaultProps = {
   label: '',
+  css: '',
 };
 
 TextInput.propTypes = {
+  value: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  css: PropTypes.string,
   label: PropTypes.string,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
