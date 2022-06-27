@@ -51,7 +51,7 @@ class Login extends React.Component {
     return (
       <main
         className="flex justify-center items-center h-screen w-screen
-        bg-gradient-to-t from-emerald-900 to-slate-900"
+        bg-gradient-to-t from-emerald-900 to-gray-900"
       >
         <div
           className="bg-slate-300 w-[300px] rounded-lg py-6

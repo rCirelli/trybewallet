@@ -5,7 +5,7 @@ import Wallet from './pages/Wallet';
 
 function App() {
   return (
-    <main className="bg-gray-900 h-screen text-gray-200">
+    <main className="h-screen text-gray-200">
       <Switch>
         <Route exact path="/" component={ Login } />
         <Route path="/carteira" component={ Wallet } />

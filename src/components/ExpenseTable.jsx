@@ -2,20 +2,38 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import TableHeaders from './TableHeaders';
+import TableRow from './TableRow';
 // import Button from './Button';
 
 class ExpenseTable extends Component {
   render() {
+    const { wallet } = this.props;
+
     return (
       <table
-        className="max-w-6xl w-11/12 border border-emerald-900 rounded-lg px-3 py-1
-        bg-gradient-to-b from-slate-900 backdrop-blur-sm
+        className="max-w-6xl w-11/12 border border-emerald-900 rounded-lg py-1
+        bg-gradient-to-b from-slate-900 backdrop-blur-sm table-auto
         flex flex-col justify-center align-center gap-3"
       >
-        <thead className="w-full flex flex-wrap justify-evenly align-center">
-          <TableHeaders />
+        <TableHeaders>
+          Descrição;
+          Tag;
+          Método de pagamento;
+          Valor;
+          Moeda;
+          Câmbio utilizado;
+          Valor convertido;
+          Moeda de conversão;
+          Editar/Excluir
+        </TableHeaders>
 
-        </thead>
+        <tbody className="w-full">
+          {
+            wallet && wallet?.expenses?.map((entry) => (
+              <TableRow key={ entry.id } rowData={ entry } />
+            ))
+          }
+        </tbody>
       </table>
     );
   }

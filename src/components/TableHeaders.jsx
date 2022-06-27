@@ -1,65 +1,38 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class ExpenseTable extends Component {
+class TableHeaders extends Component {
   render() {
+    const { children } = this.props;
+    const headerArray = children.split('; ');
+
+    const headers = headerArray.map((header, index) => (
+      <th
+        key={ `0${index}` }
+        className="px-3 flex-1 text-left"
+      >
+        {header}
+      </th>
+    ));
+
     return (
-      <tr>
-        <th
-          className="text-sm pr-3 w-24 text-slate-400"
-        >
-          Descrição
-        </th>
-        <th
-          className="text-sm px-3 border-x border-emerald-900 w-24 text-slate-400"
-        >
-          Tag
-        </th>
-        <th
-          className="text-sm px-3 border-x border-emerald-900 w-24 text-slate-400"
-        >
-          Método de pagamento
-        </th>
-        <th
-          className="text-sm px-3 border-x border-emerald-900 w-24 text-slate-400"
-        >
-          Valor
-        </th>
-        <th
-          className="text-sm px-3 border-x border-emerald-900 w-24 text-slate-400"
-        >
-          Moeda
-        </th>
-        <th
-          className="text-sm px-3 border-x border-emerald-900 w-24 text-slate-400"
-        >
-          Câmbio utilizado
-        </th>
-        <th
-          className="text-sm px-3 border-x border-emerald-900 w-24 text-slate-400"
-        >
-          Valor convertido
-        </th>
-        <th
-          className="text-sm px-3 border-x border-emerald-900 w-24 text-slate-400"
-        >
-          Moeda de conversão
-        </th>
-        <th
-          className="text-sm pl-3 w-24 text-slate-400"
-        >
-          Editar/Excluir
-        </th>
-      </tr>
+      <thead
+        className="w-full border-b border-emerald-900"
+      >
+        <tr className="flex justify-evenly items-center text-sm text-slate-400">
+          {headers}
+        </tr>
+      </thead>
     );
   }
 }
 
-ExpenseTable.defaultProps = {
+TableHeaders.defaultProps = {
   wallet: {},
 };
 
-ExpenseTable.propTypes = {
+TableHeaders.propTypes = {
   wallet: PropTypes.shape({}),
+  children: PropTypes.node.isRequired,
 };
-export default ExpenseTable;
+export default TableHeaders;

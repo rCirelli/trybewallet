@@ -10,7 +10,7 @@ class Button extends Component {
       <button
         id={ name }
         type="button"
-        className={ `inline-block px-6 py-3 bg-emerald-600 text-white mb-3
+        className={ `inline-block px-6 py-3 bg-emerald-600 text-white my-2
       font-medium text-base leading-tight rounded-md shadow-md
       hover:bg-emerald-700 hover:shadow-lg focus:bg-emerald-700 focus:shadow-lg
       focus:outline-none focus:ring-0 active:bg-emerald-800 active:shadow-lg
