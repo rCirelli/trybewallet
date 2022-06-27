@@ -1,7 +1,7 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 import {
   SET_CURRENCIES, REQUEST_CURRENCIES_ERROR, // REQUEST_CURRENCIES,
-  SAVE_EXPENSE,
+  SAVE_EXPENSE, DELETE_EXPENSE,
   REQUEST_RATES_ERROR, SET_RATES, // REQUEST_RATES
 } from '../actions';
 
@@ -16,17 +16,11 @@ const INITIAL_STATE = {
 
 const walletReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-  // case REQUEST_CURRENCIES:
-  //   return state;
-
   case REQUEST_CURRENCIES_ERROR:
     return { ...state, error: action.payload };
 
   case SET_CURRENCIES:
     return { ...state, currencies: action.payload };
-
-    // case REQUEST_RATES:
-    //   return state;
 
   case REQUEST_RATES_ERROR:
     return { ...state, error: action.payload };
@@ -36,6 +30,12 @@ const walletReducer = (state = INITIAL_STATE, action) => {
 
   case SAVE_EXPENSE:
     return { ...state, expenses: [...state.expenses, action.payload] };
+
+  case DELETE_EXPENSE:
+    return {
+      ...state,
+      expenses: state.expenses.filter((expense) => expense.id !== action.payload),
+    };
 
   default:
     return state;

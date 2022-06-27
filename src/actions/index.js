@@ -9,3 +9,4 @@ export const REQUEST_RATES_ERROR = 'REQUEST_RATES_ERROR';
 export const SET_RATES = 'SET_RATES';
 
 export const SAVE_EXPENSE = 'SAVE_EXPENSE';
+export const DELETE_EXPENSE = 'DELETE_EXPENSE';

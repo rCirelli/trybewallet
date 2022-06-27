@@ -8,6 +8,7 @@ class Button extends Component {
     const { name, label, onClick, disabled, css } = this.props;
     return (
       <button
+        data-testid={ name }
         id={ name }
         type="button"
         className={ `inline-block px-6 py-3 bg-emerald-600 text-white my-2

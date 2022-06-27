@@ -1,7 +1,15 @@
+import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Button from './Button';
+import { deleteExpense } from '../actions/expenses';
 
 class TableRow extends Component {
+  deleteExpense = () => {
+    const { dispatch, rowData } = this.props;
+    dispatch(deleteExpense(rowData.id));
+  }
+
   render() {
     const { rowData } = this.props;
     const { currency } = rowData;
@@ -57,9 +65,15 @@ class TableRow extends Component {
               {targetCurrencyName}
             </td>
             <td
-              className="px-3 border-l border-emerald-900 flex-1"
+              className="px-3 border-l border-emerald-900 flex-1 flex"
             >
-              Editar
+              <button type="button">Editar</button>
+              <Button
+                css="max-h-10 px-2 self-end"
+                name="delete-btn"
+                label="Excluir"
+                onClick={ this.deleteExpense }
+              />
             </td>
           </>
         )}
@@ -84,6 +98,7 @@ TableRow.defaultProps = ({
 });
 
 TableRow.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   rowData: PropTypes.shape({
     id: PropTypes.number,
     value: PropTypes.string,
@@ -98,4 +113,4 @@ TableRow.propTypes = {
   }),
 };
 
-export default TableRow;
+export default connect()(TableRow);
