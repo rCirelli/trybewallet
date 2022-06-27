@@ -18,11 +18,11 @@ class Wallet extends React.Component {
 
     return (
       <div
-        className="h-full w-full bg-gradient-to-t from-emerald-900 to-slate-900"
+        className="min-h-screen w-full bg-gradient-to-t from-emerald-900 to-slate-900"
       >
         <div
-          className="flex flex-col justify-start items-center h-full w-full gap-5
-            backdrop-brightness-[0.3]"
+          className="flex flex-col justify-start items-center min-h-screen w-full gap-5
+            backdrop-brightness-[0.3] pb-8"
         >
           <Header />
           <ExpenseForm />

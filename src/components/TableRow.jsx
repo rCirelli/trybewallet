@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Button from './Button';
+import { TrashSimple, PencilSimple } from 'phosphor-react';
 import { deleteExpense } from '../actions/expenses';
 
 class TableRow extends Component {
@@ -65,15 +65,22 @@ class TableRow extends Component {
               {targetCurrencyName}
             </td>
             <td
-              className="px-3 border-l border-emerald-900 flex-1 flex"
+              className="px-3 border-l border-emerald-900 flex-1 flex justify-evenly"
             >
-              <button type="button">Editar</button>
-              <Button
-                css="max-h-10 px-2 self-end"
-                name="delete-btn"
-                label="Excluir"
+              <button
+                type="button"
+                data-testid="edit-btn"
+                onClick={ () => console.log('edit') }
+              >
+                <PencilSimple size={ 20 } color="#38bdf8" weight="bold" />
+              </button>
+              <button
+                type="button"
+                data-testid="delete-btn"
                 onClick={ this.deleteExpense }
-              />
+              >
+                <TrashSimple size={ 20 } color="#dc2626" weight="bold" />
+              </button>
             </td>
           </>
         )}

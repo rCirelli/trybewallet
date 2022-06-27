@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import TableHeaders from './TableHeaders';
 import TableRow from './TableRow';
-// import Button from './Button';
 
 class ExpenseTable extends Component {
   render() {
@@ -27,7 +26,7 @@ class ExpenseTable extends Component {
           Editar/Excluir
         </TableHeaders>
 
-        <tbody className="w-full">
+        <tbody className="w-full pb-2 flex flex-col justify-center gap-2">
           {
             wallet && wallet?.expenses?.map((entry) => (
               <TableRow key={ entry.id } rowData={ entry } />

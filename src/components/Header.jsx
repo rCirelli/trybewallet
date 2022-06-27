@@ -4,16 +4,10 @@ import PropTypes from 'prop-types';
 
 class Header extends Component {
   state = {
-    expensesTotal: 0,
     currentCurrency: 'BRL',
   }
 
-  componentDidUpdate() {
-    this.sumExpenses();
-  }
-
   sumExpenses = () => {
-    const { expensesTotal } = this.state;
     const { wallet: { expenses } } = this.props;
 
     const totalExpense = expenses.reduce((acc, expense) => {
@@ -26,14 +20,12 @@ class Header extends Component {
       return (newValue + acc);
     }, 0).toFixed(2);
 
-    if (expensesTotal !== totalExpense) {
-      this.setState({ expensesTotal: totalExpense });
-    }
+    return totalExpense;
   }
 
   render() {
     const { user } = this.props;
-    const { expensesTotal, currentCurrency } = this.state;
+    const { currentCurrency } = this.state;
 
     return (
       <header
@@ -56,7 +48,7 @@ class Header extends Component {
             <div
               data-testid="total-field"
             >
-              {expensesTotal}
+              {this.sumExpenses()}
             </div>
           </div>
           <div
