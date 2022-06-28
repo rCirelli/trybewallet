@@ -34,23 +34,23 @@ class Wallet extends React.Component {
 }
 
 Wallet.propTypes = {
-  user: PropTypes.shape({
-    email: PropTypes.string.isRequired,
-  }).isRequired,
-  wallet: PropTypes.shape({
-    currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
-    expenses: PropTypes.arrayOf(PropTypes.shape({
-      // id: PropTypes.number.isRequired,
-      // value: PropTypes.string.isRequired,
-      // currency: PropTypes.string.isRequired,
-      // method: PropTypes.string.isRequired,
-      // tag: PropTypes.string.isRequired,
-      // description: PropTypes.string.isRequired,
-      // exchangeRates: PropTypes.string.isRequired,
-    })).isRequired,
-    editor: PropTypes.bool.isRequired,
-    idToEdit: PropTypes.number.isRequired,
-  }).isRequired,
+  // user: PropTypes.shape({
+  //   email: PropTypes.string.isRequired,
+  // }).isRequired,
+  // wallet: PropTypes.shape({
+  //   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  //   expenses: PropTypes.arrayOf(PropTypes.shape({
+  //     // id: PropTypes.number.isRequired,
+  //     // value: PropTypes.string.isRequired,
+  //     // currency: PropTypes.string.isRequired,
+  //     // method: PropTypes.string.isRequired,
+  //     // tag: PropTypes.string.isRequired,
+  //     // description: PropTypes.string.isRequired,
+  //     // exchangeRates: PropTypes.string.isRequired,
+  //   })).isRequired,
+  //   editor: PropTypes.bool.isRequired,
+  //   // idToEdit: PropTypes.number.isRequired,
+  // }).isRequired,
   dispatch: PropTypes.func.isRequired,
 };
 

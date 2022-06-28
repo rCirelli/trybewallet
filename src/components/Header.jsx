@@ -80,8 +80,8 @@ Header.propTypes = {
         ask: PropTypes.string,
       }).isRequired,
     })).isRequired,
-    editor: PropTypes.bool.isRequired,
-    idToEdit: PropTypes.number.isRequired,
+    // editor: PropTypes.bool.isRequired,
+    // idToEdit: PropTypes.number.isRequired,
   }).isRequired,
 };
 

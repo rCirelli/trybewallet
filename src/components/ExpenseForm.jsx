@@ -33,7 +33,6 @@ class ExpenseForm extends Component {
   }
 
   onChangeHandler = ({ target }) => {
-    console.log(target.value);
     this.setState({ [target.id]: String(target.value) });
   }
 
@@ -66,9 +65,9 @@ class ExpenseForm extends Component {
 
     return (
       <div
-        className="max-w-6xl w-11/12 border border-emerald-900 rounded-lg px-3 py-3 pb-5
+        className={ `max-w-6xl w-11/12 border border-emerald-900 rounded-lg px-3 py-3 pb-5
         bg-gradient-to-b from-slate-900 w-full backdrop-blur-sm mt-[5.5rem]
-        flex flex-wrap justify-center align-center gap-5"
+        flex flex-wrap justify-center align-center gap-5 ${editor && 'border-red-600'}` }
       >
         <div className="w-full flex flex-wrap justify-evenly align-center">
           <TextInput
@@ -116,7 +115,7 @@ class ExpenseForm extends Component {
             value={ description }
           />
           <Button
-            css="max-h-10 self-end"
+            css={ `max-h-10 self-end ${editor && 'bg-red-800 hover:bg-red-900'}` }
             name="btn-add-expense"
             label={ editor ? 'Editar despesa' : 'Adicionar despesa' }
             onClick={ this.handleSubmit }
