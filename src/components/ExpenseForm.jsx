@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Dropdown from './Dropdown';
 import TextInput from './TextInput';
 import Button from './Button';
-import saveExpense from '../actions/expenses';
+import saveExpense, { updateExpense } from '../actions/expenses';
 import { fetchRates } from '../actions/rates';
 
 class ExpenseForm extends Component {
@@ -14,26 +14,54 @@ class ExpenseForm extends Component {
     method: 'Dinheiro',
     tag: 'Alimentação',
     description: '',
-  }
+  };
 
   state = this.INITIAL_STATE;
 
+  componentDidUpdate(prevProps) {
+    const { expenseToEdit } = this.props;
+
+    if (prevProps.expenseToEdit !== expenseToEdit) {
+      this.updateExpenseState();
+    }
+  }
+
+  updateExpenseState = () => {
+    const { expenseToEdit } = this.props;
+
+    this.setState({ ...expenseToEdit });
+  }
+
   onChangeHandler = ({ target }) => {
+    console.log(target.value);
     this.setState({ [target.id]: String(target.value) });
   }
 
   handleSubmit = async () => {
-    const { dispatch, wallet } = this.props;
+    const { dispatch, wallet, editor } = this.props;
     const id = wallet.expenses.length;
     const exchangeRates = await fetchRates()();
     const expense = { ...this.state, id, exchangeRates };
 
-    dispatch(saveExpense(expense));
-    this.setState(this.INITIAL_STATE);
+    if (!editor) {
+      dispatch(saveExpense(expense));
+    }
+    if (editor) {
+      dispatch(updateExpense({ ...this.state }));
+    }
+    this.setState({ ...this.INITIAL_STATE });
+  }
+
+  editMode = () => {
+    const { editor, idToEdit, wallet: { expenses } } = this.props;
+    if (editor) {
+      const expense = expenses.find(({ id }) => id === idToEdit);
+      return expense;
+    }
   }
 
   render() {
-    const { wallet } = this.props;
+    const { wallet, editor } = this.props;
     const { value, description, currency, method, tag } = this.state;
 
     return (
@@ -44,6 +72,7 @@ class ExpenseForm extends Component {
       >
         <div className="w-full flex flex-wrap justify-evenly align-center">
           <TextInput
+            type="number"
             id="value"
             label="Valor"
             name="value-input"
@@ -89,7 +118,7 @@ class ExpenseForm extends Component {
           <Button
             css="max-h-10 self-end"
             name="btn-add-expense"
-            label="Adicionar despesa"
+            label={ editor ? 'Editar despesa' : 'Adicionar despesa' }
             onClick={ this.handleSubmit }
           />
         </div>
@@ -97,6 +126,18 @@ class ExpenseForm extends Component {
     );
   }
 }
+
+ExpenseForm.defaultProps = {
+  expenseToEdit: {
+    id: NaN,
+    value: '',
+    currency: '',
+    method: '',
+    tag: '',
+    description: '',
+    exchangeRates: '',
+  },
+};
 
 ExpenseForm.propTypes = {
   dispatch: PropTypes.func.isRequired,
@@ -111,13 +152,26 @@ ExpenseForm.propTypes = {
       // description: PropTypes.string.isRequired,
       // exchangeRates: PropTypes.string.isRequired,
     })).isRequired,
-    editor: PropTypes.bool.isRequired,
-    idToEdit: PropTypes.number.isRequired,
   }).isRequired,
+  editor: PropTypes.bool.isRequired,
+  idToEdit: PropTypes.number.isRequired,
+  expenseToEdit: PropTypes.shape({
+    // id: PropTypes.number,
+    value: PropTypes.string,
+    currency: PropTypes.string,
+    method: PropTypes.string,
+    tag: PropTypes.string,
+    description: PropTypes.string,
+    // exchangeRates: PropTypes.string,
+  }),
 };
 
 const mapStateToProps = (state) => ({
   wallet: state.wallet,
+  editor: state.wallet.editor,
+  idToEdit: state.wallet.idToEdit,
+  expenseToEdit: state.wallet.editor
+    ? state.wallet.expenses.find(({ id }) => id === state.wallet.idToEdit) : {},
 });
 
 export default connect(mapStateToProps)(ExpenseForm);

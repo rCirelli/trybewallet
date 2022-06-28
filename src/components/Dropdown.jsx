@@ -7,14 +7,26 @@ class Dropdown extends Component {
   render() {
     const { name, onChange, label, options, id, defaultValue } = this.props;
 
-    const optionsList = () => {
-      const list = [...options];
-      return list.map((option) => (
-        <option key={ option } value={ option }>
-          {option}
-        </option>
-      ));
-    };
+    // const optionsList = () => {
+    //   const list = [...options];
+    //   return list.map((option) => {
+    //     let selected = false;
+    //     if (option === defaultValue) {
+    //       selected = true;
+    //     }
+    //     return (
+    //       <option key={ option } value={ option } selected={ selected }>
+    //         {option}
+    //       </option>
+    //     );
+    //   });
+    // };
+
+    const optionsList = options.map((option) => (
+      <option key={ option } value={ option }>
+        {option}
+      </option>
+    ));
 
     return (
       <div>
@@ -30,7 +42,7 @@ class Dropdown extends Component {
             outline outline-1 outline-emerald-900 outline-offset-1 bg-slate-900
             border-none placeholder:text-gray-400 py-2 pl-4 pr-8` }
           >
-            {optionsList()}
+            {optionsList}
           </select>
         </label>
       </div>

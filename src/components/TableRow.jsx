@@ -2,12 +2,17 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { TrashSimple, PencilSimple } from 'phosphor-react';
-import { deleteExpense } from '../actions/expenses';
+import { deleteExpense, editExpense } from '../actions/expenses';
 
 class TableRow extends Component {
   deleteExpense = () => {
     const { dispatch, rowData } = this.props;
     dispatch(deleteExpense(rowData.id));
+  }
+
+  editExpense = () => {
+    const { dispatch, rowData } = this.props;
+    dispatch(editExpense(rowData.id));
   }
 
   render() {
@@ -70,7 +75,7 @@ class TableRow extends Component {
               <button
                 type="button"
                 data-testid="edit-btn"
-                onClick={ () => console.log('edit') }
+                onClick={ this.editExpense }
               >
                 <PencilSimple size={ 20 } color="#38bdf8" weight="bold" />
               </button>
