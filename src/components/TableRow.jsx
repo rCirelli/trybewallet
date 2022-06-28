@@ -21,7 +21,6 @@ class TableRow extends Component {
     const currencyInfo = rowData?.exchangeRates[currency];
     const currencyRate = currencyInfo?.ask;
     const currencyName = currencyInfo?.name.split('/')[0];
-    // const targetCurrencyName = currencyInfo?.name.split('/')[1];
     const targetCurrencyName = 'Real';
     const convertedValue = (Number(currencyRate) * Number(rowData.value)).toFixed(2);
 

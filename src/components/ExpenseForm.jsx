@@ -38,11 +38,11 @@ class ExpenseForm extends Component {
 
   handleSubmit = async () => {
     const { dispatch, wallet, editor } = this.props;
-    const id = wallet.expenses.length;
-    const exchangeRates = await fetchRates()();
-    const expense = { ...this.state, id, exchangeRates };
 
     if (!editor) {
+      const id = wallet.expenses.length;
+      const exchangeRates = await fetchRates()();
+      const expense = { ...this.state, id, exchangeRates };
       dispatch(saveExpense(expense));
     }
     if (editor) {
@@ -127,6 +127,8 @@ class ExpenseForm extends Component {
 }
 
 ExpenseForm.defaultProps = {
+  idToEdit: 0,
+  editor: false,
   expenseToEdit: {
     id: NaN,
     value: '',
@@ -152,8 +154,8 @@ ExpenseForm.propTypes = {
       // exchangeRates: PropTypes.string.isRequired,
     })).isRequired,
   }).isRequired,
-  editor: PropTypes.bool.isRequired,
-  idToEdit: PropTypes.number.isRequired,
+  editor: PropTypes.bool,
+  idToEdit: PropTypes.number,
   expenseToEdit: PropTypes.shape({
     // id: PropTypes.number,
     value: PropTypes.string,

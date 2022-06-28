@@ -38,6 +38,13 @@ class ExpenseTable extends Component {
   }
 }
 
+ExpenseTable.defaultProps = {
+  wallet: {
+    editor: false,
+    idToEdit: 0,
+  },
+};
+
 ExpenseTable.propTypes = {
   // dispatch: PropTypes.func.isRequired,
   wallet: PropTypes.shape({
@@ -51,9 +58,9 @@ ExpenseTable.propTypes = {
       // description: PropTypes.string.isRequired,
       // exchangeRates: PropTypes.string.isRequired,
     })).isRequired,
-    editor: PropTypes.bool.isRequired,
-    idToEdit: PropTypes.number.isRequired,
-  }).isRequired,
+    editor: PropTypes.bool,
+    idToEdit: PropTypes.number,
+  }),
 };
 
 const mapStateToProps = (state) => ({
